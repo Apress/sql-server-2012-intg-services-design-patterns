@@ -1,0 +1,78 @@
+<#@ import namespace="System.Data" #>
+<#@ import namespace="Varigence.Hadron.CoreLowerer.SchemaManagement" #>
+<# var connection = SchemaManager.CreateConnectionNode("SchemaProvider", "Data Source=(local);Initial Catalog=SSISIncrementalLoad_Source;Provider=SQLNCLI11.1;Integrated Security=SSPI;"); #>
+<# var tables = connection.GenerateTableNodes(); #>
+		<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+			<Connections>
+				<Connection Name="SSISIncrementalLoad_Source" ConnectionString="Data Source=(local);Initial Catalog=SSISIncrementalLoad_Source;Provider=SQLNCLI11.1;Integrated Security=SSPI;" />
+				<Connection Name="SSISIncrementalLoad_Stage" ConnectionString="Data Source=(local);Initial Catalog=SSISIncrementalLoad_Stage;Provider=SQLNCLI11.1;OLE DB Services=1;Integrated Security=SSPI;" />
+			</Connections>
+			<Packages>
+				<# foreach (var table in tables) { #>
+				<Package Name="IncrementalLoad_<#=table.Name#>" ConstraintMode="Linear" ProtectionLevel="EncryptSensitiveWithUserKey">
+					<Tasks>
+						<ExecuteSQL Name="Truncate stgUpdates_<#=table.Name#>" ConnectionName="SSISIncrementalLoad_Stage">
+							<DirectInput>
+								Truncate Table stgUpdates_<#=table.Name#>
+							</DirectInput>
+						</ExecuteSQL>
+						<Dataflow Name="Load <#=table.Name#>">
+							<Transformations>
+								<OleDbSource Name="<#=table.Name#> Source" ConnectionName="SSISIncrementalLoad_Source">
+									<DirectInput>
+										SELECT <#=table.GetColumnList()#> FROM <#=table.SchemaQualifiedName#>
+									</DirectInput>
+								</OleDbSource>
+								<Lookup Name="Correlate" OleDbConnectionName="SSISIncrementalLoad_Stage" NoMatchBehavior="RedirectRowsToNoMatchOutput">
+									<DirectInput>
+										SELECT <#=table.GetColumnList()#> FROM dbo.<#=table.Name#>
+									</DirectInput>
+									<Inputs>
+										<# foreach (var keyColumn in table.Keys[0].Columns) { #>
+											<Column SourceColumn="<#=keyColumn.Column#>" TargetColumn="<#=keyColumn.Column#>" />
+										<# } #>
+									</Inputs>
+									<Outputs>
+										<# foreach (var col in table.Columns) { #>
+											<Column SourceColumn="<#=col#>" TargetColumn="Dest_<#=col#>" />
+										<# } #>
+									</Outputs>
+								</Lookup>
+								<ConditionalSplit Name="Filter">
+									<OutputPaths>
+										<OutputPath Name="Changed Rows">
+											<# string exp = "";
+												foreach (var colex in table.Columns) { exp += "(" + colex + " != Dest_" + colex + ") || "; } #>
+											<Expression>
+												<#=exp.Substring(0, exp.Length - 4)#>
+											</Expression>
+										</OutputPath>
+									</OutputPaths>
+								</ConditionalSplit>
+								<OleDbDestination Name="stgUpdates_"
+									<#=table.Name#>" ConnectionName="SSISIncrementalLoad_Stage">
+									<InputPath OutputPathName="Filter.Changed Rows" />
+									<ExternalTableOutput Table="dbo.stgUpdates_<#=table.Name#>" />
+								</OleDbDestination>
+								<OleDbDestination Name="<#=table.Name#> Destination" ConnectionName="SSISIncrementalLoad_Stage">
+									<InputPath OutputPathName="Correlate.NoMatch" />
+									<ExternalTableOutput Table="dbo.<#=table.Name#>" />
+								</OleDbDestination>
+							</Transformations>
+						</Dataflow>
+						<ExecuteSQL Name="Apply stgUpdates_<#=table.Name#>" ConnectionName="SSISIncrementalLoad_Stage">
+							<# string upd ="Update Dest Set ";
+    foreach (var colex in table.Columns.Where(column => !table.Keys[0].Columns.Select(keyColumn => keyColumn.Column).Contains(column))) { 
+      upd = upd + "Dest." + colex + " = Upd." + colex + ","; 
+    } 
+    var updc = upd.Substring(0,upd.Length-1) + " From " + table.SchemaQualifiedName + " Dest Join [" + table.Schema.Name + "].[stgUpdates_" + table.Name + "] Upd On Upd." + table.Keys[0].Columns[0].Column + " = Dest." + table.Keys[0].Columns[0].Column;#>
+  <DirectInput>
+						<#=updc#>
+					</DirectInput>
+				</ExecuteSQL>
+			</Tasks>
+		</Package>
+		<# } #>
+	</Packages>
+</Biml>
+	

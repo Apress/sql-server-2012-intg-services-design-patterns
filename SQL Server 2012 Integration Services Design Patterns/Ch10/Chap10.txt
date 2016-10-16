@@ -1,0 +1,21 @@
+// Figure 10-2. Multiconditional evaluation in expression language
+(TestCase == 1) ? "Test case = Gas" : (TestCase == 2 ? "Test case = Liquid" : (TestCase == 3 ?
+"Test case = Solid" : "Unknown Test Case"))
+
+
+
+// Figure 10-4: Dynamic file name using expression
+"e:\\Data\\"
++ "Medicare_"
++ (DT_STR, 4, 1252)(DATEPART("Year", GETDATE()))
++ RIGHT("0" + (DT_STR, 2, 1252)(DATEPART("Month", GETDATE())), 2)
++ RIGHT("0" + (DT_STR, 2, 1252)(DATEPART("Day", GETDATE())), 2)
++ ".txt"
+
+
+
+// Unlabeled snippet in "Data Cleansing" section
+(LEN(TRIM([Street_Address])) > 0) ? TRIM([Street_Address]) : (DT_WSTR, 100)NULL(DT_WSTR, 100)
+
+
+

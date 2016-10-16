@@ -1,0 +1,6 @@
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+	<Packages>
+		<Package Name="TestBimlPackage" ConstraintMode="Parallel" ProtectionLevel="EncryptSensitiveWithUserKey">
+		</Package>
+	</Packages>
+</Biml>

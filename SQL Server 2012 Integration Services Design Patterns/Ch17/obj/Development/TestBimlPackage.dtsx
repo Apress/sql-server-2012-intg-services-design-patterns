@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/17/2012 6:36:20 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="VMSQL2012E"
+  DTS:CreatorName="A. Ray Leonard"
+  DTS:DTSID="{C9DF041B-1015-41DC-A943-E6173960112B}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.2100.60"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="TestBimlPackage"
+  DTS:VersionGUID="{B77A9AA3-C187-4FCB-AD64-5DB19667AB49}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables />
+</DTS:Executable>

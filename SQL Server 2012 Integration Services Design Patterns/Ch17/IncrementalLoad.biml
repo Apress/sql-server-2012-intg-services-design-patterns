@@ -1,0 +1,71 @@
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+	<Connections>
+		<Connection Name="SSISIncrementalLoad_Source" ConnectionString="Data Source=(local);Initial Catalog=SSISIncrementalLoad_Source;Provider=SQLNCLI11.1;Integrated Security=SSPI" />
+		<Connection Name="SSISIncrementalLoad_Dest" ConnectionString="Data Source=(local);Initial Catalog=SSISIncrementalLoad_Dest;Provider=SQLNCLI11.1;OLE DB Services=1;Integrated Security=SSPI;" />
+	</Connections>
+	<Packages>
+		<Package Name="IncrementalLoadPackage" ConstraintMode="Parallel" ProtectionLevel="EncryptSensitiveWithUserKey">
+			<Tasks>
+				<ExecuteSQL Name="Truncate stgUpdates" ConnectionName="SSISIncrementalLoad_Dest">
+					<DirectInput>Truncate Table stgUpdates</DirectInput>
+				</ExecuteSQL>
+				<Dataflow Name="Load tblDest">
+					<PrecedenceConstraints>
+						<Inputs>
+							<Input OutputPathName="Truncate stgUpdates.Output" />
+						</Inputs>
+					</PrecedenceConstraints>
+					<Transformations>
+						<OleDbSource Name="tblSource Source" ConnectionName="SSISIncrementalLoad_Source">
+							<ExternalTableInput Table="dbo.tblSource" />
+						</OleDbSource>
+						<Lookup Name="Correlate" OleDbConnectionName="SSISIncrementalLoad_Dest" NoMatchBehavior="RedirectRowsToNoMatchOutput">
+							<InputPath OutputPathName="tblSource Source.Output" />
+							<DirectInput>SELECT ColID, ColA, ColB, ColC FROM dbo.tblDest</DirectInput>
+							<Inputs>
+								<Column SourceColumn="ColID" TargetColumn="ColID" />
+							</Inputs>
+							<Outputs>
+								<Column SourceColumn="ColA" TargetColumn="Dest_ColA" />
+								<Column SourceColumn="ColB" TargetColumn="Dest_ColB" />
+								<Column SourceColumn="ColC" TargetColumn="Dest_ColC" />
+							</Outputs>
+						</Lookup>
+						<OleDbDestination Name="tblDest Destination" ConnectionName="SSISIncrementalLoad_Dest">
+							<InputPath OutputPathName="Correlate.NoMatch" />
+							<ExternalTableOutput Table="dbo.tblDest" />
+						</OleDbDestination>
+						<ConditionalSplit Name="Filter">
+							<InputPath OutputPathName="Correlate.Match"/>
+							<OutputPaths>
+								<OutputPath Name="Changed Rows">
+									<Expression>(ColA != Dest_ColA) || (ColB != Dest_ColB) || (ColC != Dest_ColC)</Expression>
+								</OutputPath>
+							</OutputPaths>
+						</ConditionalSplit>
+						<OleDbDestination Name="stgUpdates" ConnectionName="SSISIncrementalLoad_Dest">
+							<InputPath OutputPathName="Filter.Changed Rows" />
+							<ExternalTableOutput Table="dbo.stgUpdates" />
+						</OleDbDestination>
+					</Transformations>
+				</Dataflow>
+				<ExecuteSQL Name="Apply stgUpdates" ConnectionName="SSISIncrementalLoad_Dest">
+					<PrecedenceConstraints>
+						<Inputs>
+							<Input OutputPathName="Load tblDest.Output" />
+						</Inputs>
+					</PrecedenceConstraints>
+					<DirectInput>
+						Update Dest
+						Set Dest.ColA = Upd.ColA
+						,Dest.ColB = Upd.ColB
+						,Dest.ColC = Upd.ColC
+						From tblDest Dest
+						Join stgUpdates Upd
+						On Upd.ColID = Dest.ColID
+					</DirectInput>
+				</ExecuteSQL>
+			</Tasks>
+		</Package>
+	</Packages>
+</Biml>

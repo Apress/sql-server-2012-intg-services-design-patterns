@@ -1,0 +1,889 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DTS:Executable
+  DTS:refId="Package"
+  DTS:CreationDate="05/17/2012 18:48:10"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="VMSQL2012E"
+  DTS:CreatorName="A. Ray Leonard"
+  DTS:DTSID="{3E03995A-07B0-48E0-A356-EC542B5BBF42}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion=""
+  DTS:LocaleID="1033"
+  DTS:ObjectName="IncrementalLoadPackage"
+  DTS:VersionBuild="0"
+  DTS:VersionGUID="{400B8E3D-7821-4E0E-9293-C1F941D23331}" xmlns:DTS="www.microsoft.com/SqlServer/Dts">
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SSISIncrementalLoad_Source]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{BB275077-A3DC-4930-8B05-7C6700165728}"
+      DTS:ObjectName="SSISIncrementalLoad_Source">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=(local);Initial Catalog=SSISIncrementalLoad_Source;Provider=SQLNCLI11.1;Integrated Security=SSPI"></DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SSISIncrementalLoad_Dest]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{7E38A2F6-3B47-415D-A3F5-804E73DCD2FA}"
+      DTS:ObjectName="SSISIncrementalLoad_Dest">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=(local);Initial Catalog=SSISIncrementalLoad_Dest;Provider=SQLNCLI11.1;OLE DB Services=1;Integrated Security=SSPI;"></DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Truncate stgUpdates"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:DTSID="{0E8DA2E1-7C2F-4F74-BAD3-7B5D645C6B3D}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate stgUpdates"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7E38A2F6-3B47-415D-A3F5-804E73DCD2FA}"
+          SQLTask:SqlStatementSource="Truncate Table stgUpdates" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask"></SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load tblDest"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:DTSID="{22AA0C34-00E2-4685-BA67-0D1F126001EF}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load tblDest"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              name="tblSource Source"
+              refId="Package\Load tblDest\tblSource Source"
+              usesDispositions="true"
+              version="7">
+              <connections>
+                <connection
+                  connectionManagerID="Package.ConnectionManagers[SSISIncrementalLoad_Source]"
+                  connectionManagerRefId="Package.ConnectionManagers[SSISIncrementalLoad_Source]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection"
+                  refId="Package\Load tblDest\tblSource Source.Connections[OleDbConnection]"></connection>
+              </connections>
+              <outputs>
+                <output
+                  name="Output"
+                  refId="Package\Load tblDest\tblSource Source.Outputs[Output]">
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      dataType="i4"
+                      name="ColID"
+                      refId="Package\Load tblDest\tblSource Source.Outputs[Output].ExternalColumns[ColID]"></externalMetadataColumn>
+                    <externalMetadataColumn
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="ColA"
+                      refId="Package\Load tblDest\tblSource Source.Outputs[Output].ExternalColumns[ColA]"></externalMetadataColumn>
+                    <externalMetadataColumn
+                      dataType="dbTimeStamp"
+                      name="ColB"
+                      refId="Package\Load tblDest\tblSource Source.Outputs[Output].ExternalColumns[ColB]"></externalMetadataColumn>
+                    <externalMetadataColumn
+                      dataType="i4"
+                      name="ColC"
+                      refId="Package\Load tblDest\tblSource Source.Outputs[Output].ExternalColumns[ColC]"></externalMetadataColumn>
+                  </externalMetadataColumns>
+                  <outputColumns>
+                    <outputColumn
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load tblDest\tblSource Source.Outputs[Output].ExternalColumns[ColID]"
+                      lineageId="Package\Load tblDest\tblSource Source.Outputs[Output].Columns[ColID]"
+                      name="ColID"
+                      refId="Package\Load tblDest\tblSource Source.Outputs[Output].Columns[ColID]"
+                      truncationRowDisposition="FailComponent"></outputColumn>
+                    <outputColumn
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load tblDest\tblSource Source.Outputs[Output].ExternalColumns[ColA]"
+                      length="10"
+                      lineageId="Package\Load tblDest\tblSource Source.Outputs[Output].Columns[ColA]"
+                      name="ColA"
+                      refId="Package\Load tblDest\tblSource Source.Outputs[Output].Columns[ColA]"
+                      truncationRowDisposition="FailComponent"></outputColumn>
+                    <outputColumn
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load tblDest\tblSource Source.Outputs[Output].ExternalColumns[ColB]"
+                      lineageId="Package\Load tblDest\tblSource Source.Outputs[Output].Columns[ColB]"
+                      name="ColB"
+                      refId="Package\Load tblDest\tblSource Source.Outputs[Output].Columns[ColB]"
+                      truncationRowDisposition="FailComponent"></outputColumn>
+                    <outputColumn
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load tblDest\tblSource Source.Outputs[Output].ExternalColumns[ColC]"
+                      lineageId="Package\Load tblDest\tblSource Source.Outputs[Output].Columns[ColC]"
+                      name="ColC"
+                      refId="Package\Load tblDest\tblSource Source.Outputs[Output].Columns[ColC]"
+                      truncationRowDisposition="FailComponent"></outputColumn>
+                  </outputColumns>
+                </output>
+                <output
+                  isErrorOut="true"
+                  name="Error"
+                  refId="Package\Load tblDest\tblSource Source.Outputs[Error]">
+                  <externalMetadataColumns></externalMetadataColumns>
+                  <outputColumns>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\Load tblDest\tblSource Source.Outputs[Error].Columns[ColID]"
+                      name="ColID"
+                      refId="Package\Load tblDest\tblSource Source.Outputs[Error].Columns[ColID]"></outputColumn>
+                    <outputColumn
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Load tblDest\tblSource Source.Outputs[Error].Columns[ColA]"
+                      name="ColA"
+                      refId="Package\Load tblDest\tblSource Source.Outputs[Error].Columns[ColA]"></outputColumn>
+                    <outputColumn
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load tblDest\tblSource Source.Outputs[Error].Columns[ColB]"
+                      name="ColB"
+                      refId="Package\Load tblDest\tblSource Source.Outputs[Error].Columns[ColB]"></outputColumn>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\Load tblDest\tblSource Source.Outputs[Error].Columns[ColC]"
+                      name="ColC"
+                      refId="Package\Load tblDest\tblSource Source.Outputs[Error].Columns[ColC]"></outputColumn>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\Load tblDest\tblSource Source.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      refId="Package\Load tblDest\tblSource Source.Outputs[Error].Columns[ErrorCode]"
+                      specialFlags="1"></outputColumn>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\Load tblDest\tblSource Source.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      refId="Package\Load tblDest\tblSource Source.Outputs[Error].Columns[ErrorColumn]"
+                      specialFlags="2"></outputColumn>
+                  </outputColumns>
+                </output>
+              </outputs>
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">dbo.tblSource</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+            </component>
+            <component
+              componentClassID="{671046B0-AA63-4C9F-90E4-C06E0B710CE3}"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;5"
+              name="Correlate"
+              refId="Package\Load tblDest\Correlate"
+              usesDispositions="true"
+              version="6">
+              <connections>
+                <connection
+                  connectionManagerID="Package.ConnectionManagers[SSISIncrementalLoad_Dest]"
+                  connectionManagerRefId="Package.ConnectionManagers[SSISIncrementalLoad_Dest]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection"
+                  refId="Package\Load tblDest\Correlate.Connections[OleDbConnection]"></connection>
+              </connections>
+              <inputs>
+                <input
+                  name="tblSource Source_Output_Correlate"
+                  refId="Package\Load tblDest\Correlate.Inputs[tblSource Source_Output_Correlate]">
+                  <externalMetadataColumns></externalMetadataColumns>
+                  <inputColumns>
+                    <inputColumn
+                      cachedDataType="i4"
+                      cachedName="ColID"
+                      lineageId="Package\Load tblDest\tblSource Source.Outputs[Output].Columns[ColID]"
+                      name="ColID"
+                      refId="Package\Load tblDest\Correlate.Inputs[tblSource Source_Output_Correlate].Columns[ColID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">ColID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn"></property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Match"
+                  refId="Package\Load tblDest\Correlate.Outputs[Match]"
+                  synchronousInputId="Package\Load tblDest\Correlate.Inputs[tblSource Source_Output_Correlate]">
+                  <externalMetadataColumns></externalMetadataColumns>
+                  <outputColumns>
+                    <outputColumn
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="CopyColumn"
+                      length="10"
+                      lineageId="Package\Load tblDest\Correlate.Outputs[Match].Columns[Dest_ColA]"
+                      name="Dest_ColA"
+                      refId="Package\Load tblDest\Correlate.Outputs[Match].Columns[Dest_ColA]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">ColA</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="CopyColumn"
+                      lineageId="Package\Load tblDest\Correlate.Outputs[Match].Columns[Dest_ColB]"
+                      name="Dest_ColB"
+                      refId="Package\Load tblDest\Correlate.Outputs[Match].Columns[Dest_ColB]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">ColB</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      dataType="i4"
+                      errorOrTruncationOperation="CopyColumn"
+                      lineageId="Package\Load tblDest\Correlate.Outputs[Match].Columns[Dest_ColC]"
+                      name="Dest_ColC"
+                      refId="Package\Load tblDest\Correlate.Outputs[Match].Columns[Dest_ColC]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">ColC</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                </output>
+                <output
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="NoMatch"
+                  refId="Package\Load tblDest\Correlate.Outputs[NoMatch]"
+                  synchronousInputId="Package\Load tblDest\Correlate.Inputs[tblSource Source_Output_Correlate]">
+                  <externalMetadataColumns></externalMetadataColumns>
+                </output>
+                <output
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  refId="Package\Load tblDest\Correlate.Outputs[Error]"
+                  synchronousInputId="Package\Load tblDest\Correlate.Inputs[tblSource Source_Output_Correlate]">
+                  <externalMetadataColumns></externalMetadataColumns>
+                  <outputColumns>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\Load tblDest\Correlate.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      refId="Package\Load tblDest\Correlate.Outputs[Error].Columns[ErrorCode]"
+                      specialFlags="1"></outputColumn>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\Load tblDest\Correlate.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      refId="Package\Load tblDest\Correlate.Outputs[Error].Columns[ErrorColumn]"
+                      specialFlags="2"></outputColumn>
+                  </outputColumns>
+                </output>
+              </outputs>
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT ColID, ColA, ColB, ColC FROM dbo.tblDest</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (SELECT ColID, ColA, ColB, ColC FROM dbo.tblDest) [refTable] where [refTable].[ColID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;
+  &lt;referenceColumns&gt;
+    &lt;referenceColumn name="ColID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="ColA" dataType="DT_STR" length="10" precision="0" scale="0" codePage="1252" /&gt;
+    &lt;referenceColumn name="ColB" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="ColC" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0" /&gt;
+  &lt;/referenceColumns&gt;
+&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load tblDest\tblSource Source.Outputs[Output].Columns[ColID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+            </component>
+            <component
+              componentClassID="{7F88F654-4E20-4D14-84F4-AF9C925D3087}"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              name="Filter"
+              refId="Package\Load tblDest\Filter"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  name="Correlate_Match_Filter"
+                  refId="Package\Load tblDest\Filter.Inputs[Correlate_Match_Filter]">
+                  <externalMetadataColumns></externalMetadataColumns>
+                  <inputColumns>
+                    <inputColumn
+                      cachedDataType="str"
+                      cachedName="ColA"
+                      lineageId="Package\Load tblDest\tblSource Source.Outputs[Output].Columns[ColA]"
+                      name="ColA"
+                      refId="Package\Load tblDest\Filter.Inputs[Correlate_Match_Filter].Columns[ColA]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="str"
+                      cachedName="Dest_ColA"
+                      lineageId="Package\Load tblDest\Correlate.Outputs[Match].Columns[Dest_ColA]"
+                      name="Dest_ColA"
+                      refId="Package\Load tblDest\Filter.Inputs[Correlate_Match_Filter].Columns[Dest_ColA]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ColB"
+                      lineageId="Package\Load tblDest\tblSource Source.Outputs[Output].Columns[ColB]"
+                      name="ColB"
+                      refId="Package\Load tblDest\Filter.Inputs[Correlate_Match_Filter].Columns[ColB]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Dest_ColB"
+                      lineageId="Package\Load tblDest\Correlate.Outputs[Match].Columns[Dest_ColB]"
+                      name="Dest_ColB"
+                      refId="Package\Load tblDest\Filter.Inputs[Correlate_Match_Filter].Columns[Dest_ColB]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="i4"
+                      cachedName="ColC"
+                      lineageId="Package\Load tblDest\tblSource Source.Outputs[Output].Columns[ColC]"
+                      name="ColC"
+                      refId="Package\Load tblDest\Filter.Inputs[Correlate_Match_Filter].Columns[ColC]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="i4"
+                      cachedName="Dest_ColC"
+                      lineageId="Package\Load tblDest\Correlate.Outputs[Match].Columns[Dest_ColC]"
+                      name="Dest_ColC"
+                      refId="Package\Load tblDest\Filter.Inputs[Correlate_Match_Filter].Columns[Dest_ColC]"></inputColumn>
+                  </inputColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Changed Rows"
+                  refId="Package\Load tblDest\Filter.Outputs[Changed Rows]"
+                  synchronousInputId="Package\Load tblDest\Filter.Inputs[Correlate_Match_Filter]"
+                  truncationRowDisposition="FailComponent">
+                  <externalMetadataColumns></externalMetadataColumns>
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      name="Expression">(#{Package\Load tblDest\tblSource Source.Outputs[Output].Columns[ColA]} != #{Package\Load tblDest\Correlate.Outputs[Match].Columns[Dest_ColA]}) || (#{Package\Load tblDest\tblSource Source.Outputs[Output].Columns[ColB]} != #{Package\Load tblDest\Correlate.Outputs[Match].Columns[Dest_ColB]}) || (#{Package\Load tblDest\tblSource Source.Outputs[Output].Columns[ColC]} != #{Package\Load tblDest\Correlate.Outputs[Match].Columns[Dest_ColC]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      expressionType="Notify"
+                      name="FriendlyExpression">(ColA != Dest_ColA) || (ColB != Dest_ColB) || (ColC != Dest_ColC)</property>
+                    <property
+                      dataType="System.Int32"
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                </output>
+                <output
+                  exclusionGroup="1"
+                  name="Default"
+                  refId="Package\Load tblDest\Filter.Outputs[Default]"
+                  synchronousInputId="Package\Load tblDest\Filter.Inputs[Correlate_Match_Filter]">
+                  <externalMetadataColumns></externalMetadataColumns>
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                </output>
+                <output
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  refId="Package\Load tblDest\Filter.Outputs[Error]"
+                  synchronousInputId="Package\Load tblDest\Filter.Inputs[Correlate_Match_Filter]">
+                  <externalMetadataColumns></externalMetadataColumns>
+                  <outputColumns>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\Load tblDest\Filter.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      refId="Package\Load tblDest\Filter.Outputs[Error].Columns[ErrorCode]"
+                      specialFlags="1"></outputColumn>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\Load tblDest\Filter.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      refId="Package\Load tblDest\Filter.Outputs[Error].Columns[ErrorColumn]"
+                      specialFlags="2"></outputColumn>
+                  </outputColumns>
+                </output>
+              </outputs>
+            </component>
+            <component
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              name="stgUpdates"
+              refId="Package\Load tblDest\stgUpdates"
+              usesDispositions="true"
+              version="4">
+              <connections>
+                <connection
+                  connectionManagerID="Package.ConnectionManagers[SSISIncrementalLoad_Dest]"
+                  connectionManagerRefId="Package.ConnectionManagers[SSISIncrementalLoad_Dest]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection"
+                  refId="Package\Load tblDest\stgUpdates.Connections[OleDbConnection]"></connection>
+              </connections>
+              <inputs>
+                <input
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Filter_Changed Rows_stgUpdates"
+                  refId="Package\Load tblDest\stgUpdates.Inputs[Filter_Changed Rows_stgUpdates]">
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      dataType="i4"
+                      name="ColID"
+                      refId="Package\Load tblDest\stgUpdates.Inputs[Filter_Changed Rows_stgUpdates].ExternalColumns[ColID]"></externalMetadataColumn>
+                    <externalMetadataColumn
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="ColA"
+                      refId="Package\Load tblDest\stgUpdates.Inputs[Filter_Changed Rows_stgUpdates].ExternalColumns[ColA]"></externalMetadataColumn>
+                    <externalMetadataColumn
+                      dataType="dbTimeStamp"
+                      name="ColB"
+                      refId="Package\Load tblDest\stgUpdates.Inputs[Filter_Changed Rows_stgUpdates].ExternalColumns[ColB]"></externalMetadataColumn>
+                    <externalMetadataColumn
+                      dataType="i4"
+                      name="ColC"
+                      refId="Package\Load tblDest\stgUpdates.Inputs[Filter_Changed Rows_stgUpdates].ExternalColumns[ColC]"></externalMetadataColumn>
+                  </externalMetadataColumns>
+                  <inputColumns>
+                    <inputColumn
+                      cachedDataType="i4"
+                      cachedName="ColID"
+                      externalMetadataColumnId="Package\Load tblDest\stgUpdates.Inputs[Filter_Changed Rows_stgUpdates].ExternalColumns[ColID]"
+                      lineageId="Package\Load tblDest\tblSource Source.Outputs[Output].Columns[ColID]"
+                      name="ColID"
+                      refId="Package\Load tblDest\stgUpdates.Inputs[Filter_Changed Rows_stgUpdates].Columns[ColID]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="str"
+                      cachedName="ColA"
+                      externalMetadataColumnId="Package\Load tblDest\stgUpdates.Inputs[Filter_Changed Rows_stgUpdates].ExternalColumns[ColA]"
+                      lineageId="Package\Load tblDest\tblSource Source.Outputs[Output].Columns[ColA]"
+                      name="ColA"
+                      refId="Package\Load tblDest\stgUpdates.Inputs[Filter_Changed Rows_stgUpdates].Columns[ColA]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ColB"
+                      externalMetadataColumnId="Package\Load tblDest\stgUpdates.Inputs[Filter_Changed Rows_stgUpdates].ExternalColumns[ColB]"
+                      lineageId="Package\Load tblDest\tblSource Source.Outputs[Output].Columns[ColB]"
+                      name="ColB"
+                      refId="Package\Load tblDest\stgUpdates.Inputs[Filter_Changed Rows_stgUpdates].Columns[ColB]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="i4"
+                      cachedName="ColC"
+                      externalMetadataColumnId="Package\Load tblDest\stgUpdates.Inputs[Filter_Changed Rows_stgUpdates].ExternalColumns[ColC]"
+                      lineageId="Package\Load tblDest\tblSource Source.Outputs[Output].Columns[ColC]"
+                      name="ColC"
+                      refId="Package\Load tblDest\stgUpdates.Inputs[Filter_Changed Rows_stgUpdates].Columns[ColC]"></inputColumn>
+                  </inputColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  refId="Package\Load tblDest\stgUpdates.Outputs[Error]"
+                  synchronousInputId="Package\Load tblDest\stgUpdates.Inputs[Filter_Changed Rows_stgUpdates]">
+                  <externalMetadataColumns></externalMetadataColumns>
+                  <outputColumns>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\Load tblDest\stgUpdates.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      refId="Package\Load tblDest\stgUpdates.Outputs[Error].Columns[ErrorCode]"
+                      specialFlags="1"></outputColumn>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\Load tblDest\stgUpdates.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      refId="Package\Load tblDest\stgUpdates.Outputs[Error].Columns[ErrorColumn]"
+                      specialFlags="2"></outputColumn>
+                  </outputColumns>
+                </output>
+              </outputs>
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">dbo.stgUpdates</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+            </component>
+            <component
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              name="tblDest Destination"
+              refId="Package\Load tblDest\tblDest Destination"
+              usesDispositions="true"
+              version="4">
+              <connections>
+                <connection
+                  connectionManagerID="Package.ConnectionManagers[SSISIncrementalLoad_Dest]"
+                  connectionManagerRefId="Package.ConnectionManagers[SSISIncrementalLoad_Dest]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection"
+                  refId="Package\Load tblDest\tblDest Destination.Connections[OleDbConnection]"></connection>
+              </connections>
+              <inputs>
+                <input
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Correlate_NoMatch_tblDest Destination"
+                  refId="Package\Load tblDest\tblDest Destination.Inputs[Correlate_NoMatch_tblDest Destination]">
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      dataType="i4"
+                      name="ColID"
+                      refId="Package\Load tblDest\tblDest Destination.Inputs[Correlate_NoMatch_tblDest Destination].ExternalColumns[ColID]"></externalMetadataColumn>
+                    <externalMetadataColumn
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="ColA"
+                      refId="Package\Load tblDest\tblDest Destination.Inputs[Correlate_NoMatch_tblDest Destination].ExternalColumns[ColA]"></externalMetadataColumn>
+                    <externalMetadataColumn
+                      dataType="dbTimeStamp"
+                      name="ColB"
+                      refId="Package\Load tblDest\tblDest Destination.Inputs[Correlate_NoMatch_tblDest Destination].ExternalColumns[ColB]"></externalMetadataColumn>
+                    <externalMetadataColumn
+                      dataType="i4"
+                      name="ColC"
+                      refId="Package\Load tblDest\tblDest Destination.Inputs[Correlate_NoMatch_tblDest Destination].ExternalColumns[ColC]"></externalMetadataColumn>
+                  </externalMetadataColumns>
+                  <inputColumns>
+                    <inputColumn
+                      cachedDataType="i4"
+                      cachedName="ColID"
+                      externalMetadataColumnId="Package\Load tblDest\tblDest Destination.Inputs[Correlate_NoMatch_tblDest Destination].ExternalColumns[ColID]"
+                      lineageId="Package\Load tblDest\tblSource Source.Outputs[Output].Columns[ColID]"
+                      name="ColID"
+                      refId="Package\Load tblDest\tblDest Destination.Inputs[Correlate_NoMatch_tblDest Destination].Columns[ColID]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="str"
+                      cachedName="ColA"
+                      externalMetadataColumnId="Package\Load tblDest\tblDest Destination.Inputs[Correlate_NoMatch_tblDest Destination].ExternalColumns[ColA]"
+                      lineageId="Package\Load tblDest\tblSource Source.Outputs[Output].Columns[ColA]"
+                      name="ColA"
+                      refId="Package\Load tblDest\tblDest Destination.Inputs[Correlate_NoMatch_tblDest Destination].Columns[ColA]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ColB"
+                      externalMetadataColumnId="Package\Load tblDest\tblDest Destination.Inputs[Correlate_NoMatch_tblDest Destination].ExternalColumns[ColB]"
+                      lineageId="Package\Load tblDest\tblSource Source.Outputs[Output].Columns[ColB]"
+                      name="ColB"
+                      refId="Package\Load tblDest\tblDest Destination.Inputs[Correlate_NoMatch_tblDest Destination].Columns[ColB]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="i4"
+                      cachedName="ColC"
+                      externalMetadataColumnId="Package\Load tblDest\tblDest Destination.Inputs[Correlate_NoMatch_tblDest Destination].ExternalColumns[ColC]"
+                      lineageId="Package\Load tblDest\tblSource Source.Outputs[Output].Columns[ColC]"
+                      name="ColC"
+                      refId="Package\Load tblDest\tblDest Destination.Inputs[Correlate_NoMatch_tblDest Destination].Columns[ColC]"></inputColumn>
+                  </inputColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  refId="Package\Load tblDest\tblDest Destination.Outputs[Error]"
+                  synchronousInputId="Package\Load tblDest\tblDest Destination.Inputs[Correlate_NoMatch_tblDest Destination]">
+                  <externalMetadataColumns></externalMetadataColumns>
+                  <outputColumns>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\Load tblDest\tblDest Destination.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      refId="Package\Load tblDest\tblDest Destination.Outputs[Error].Columns[ErrorCode]"
+                      specialFlags="1"></outputColumn>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\Load tblDest\tblDest Destination.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      refId="Package\Load tblDest\tblDest Destination.Outputs[Error].Columns[ErrorColumn]"
+                      specialFlags="2"></outputColumn>
+                  </outputColumns>
+                </output>
+              </outputs>
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">dbo.tblDest</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+            </component>
+          </components>
+          <paths>
+            <path
+              endId="Package\Load tblDest\Correlate.Inputs[tblSource Source_Output_Correlate]"
+              name="tblSource Source_Output_Correlate"
+              refId="Package\Load tblDest.Paths[tblSource Source_Output_Correlate]"
+              startId="Package\Load tblDest\tblSource Source.Outputs[Output]"></path>
+            <path
+              endId="Package\Load tblDest\tblDest Destination.Inputs[Correlate_NoMatch_tblDest Destination]"
+              name="Correlate_NoMatch_tblDest Destination"
+              refId="Package\Load tblDest.Paths[Correlate_NoMatch_tblDest Destination]"
+              startId="Package\Load tblDest\Correlate.Outputs[NoMatch]"></path>
+            <path
+              endId="Package\Load tblDest\Filter.Inputs[Correlate_Match_Filter]"
+              name="Correlate_Match_Filter"
+              refId="Package\Load tblDest.Paths[Correlate_Match_Filter]"
+              startId="Package\Load tblDest\Correlate.Outputs[Match]"></path>
+            <path
+              endId="Package\Load tblDest\stgUpdates.Inputs[Filter_Changed Rows_stgUpdates]"
+              name="Filter_Changed Rows_stgUpdates"
+              refId="Package\Load tblDest.Paths[Filter_Changed Rows_stgUpdates]"
+              startId="Package\Load tblDest\Filter.Outputs[Changed Rows]"></path>
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Apply stgUpdates"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:DTSID="{9132B13D-BE18-4389-BE1F-14177779A1BF}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Apply stgUpdates"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7E38A2F6-3B47-415D-A3F5-804E73DCD2FA}"
+          SQLTask:SqlStatementSource="&#xA;      Update Dest&#xA;      Set Dest.ColA = Upd.ColA&#xA;      ,Dest.ColB = Upd.ColB&#xA;      ,Dest.ColC = Upd.ColC&#xA;      From tblDest Dest&#xA;      Join stgUpdates Upd&#xA;      On Upd.ColID = Dest.ColID&#xA;     " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask"></SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_Truncate stgUpdates_To_Load tblDest]"
+      DTS:CreationName=""
+      DTS:DTSID="{EC8AEDD9-AD40-41DB-81C2-272B411295C3}"
+      DTS:From="Package\Truncate stgUpdates"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_Truncate stgUpdates_To_Load tblDest"
+      DTS:To="Package\Load tblDest"></DTS:PrecedenceConstraint>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_Load tblDest_To_Apply stgUpdates]"
+      DTS:CreationName=""
+      DTS:DTSID="{54D97889-A91C-4CDB-AA04-2A056489DCD1}"
+      DTS:From="Package\Load tblDest"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_Load tblDest_To_Apply stgUpdates"
+      DTS:To="Package\Apply stgUpdates"></DTS:PrecedenceConstraint>
+  </DTS:PrecedenceConstraints>
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+</DTS:Executable>

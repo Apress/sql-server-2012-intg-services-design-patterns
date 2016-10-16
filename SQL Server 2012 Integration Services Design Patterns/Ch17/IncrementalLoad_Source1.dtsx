@@ -1,0 +1,925 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DTS:Executable
+  DTS:refId="Package"
+  DTS:CreationDate="05/17/2012 18:56:38"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="VMSQL2012E"
+  DTS:CreatorName="A. Ray Leonard"
+  DTS:DTSID="{FCB3FA6F-DBA5-492E-94BE-74B684220DFC}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion=""
+  DTS:LocaleID="1033"
+  DTS:ObjectName="IncrementalLoad_Source1"
+  DTS:VersionBuild="0"
+  DTS:VersionGUID="{5D632F20-27A2-4C92-A7A6-5893C7286904}" xmlns:DTS="www.microsoft.com/SqlServer/Dts">
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SSISIncrementalLoad_Source]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{32DA6783-5ECE-4732-BAB1-F19E713F63BF}"
+      DTS:ObjectName="SSISIncrementalLoad_Source">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=(local);Initial Catalog=SSISIncrementalLoad_Source;Provider=SQLNCLI11.1;Integrated Security=SSPI;"></DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SSISIncrementalLoad_Stage]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{AF7DD98C-41B0-4938-B830-6927887DB996}"
+      DTS:ObjectName="SSISIncrementalLoad_Stage">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=(local);Initial Catalog=SSISIncrementalLoad_Stage;Provider=SQLNCLI11.1;OLE DB Services=1;Integrated Security=SSPI;"></DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Truncate stgUpdates_Source1"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:DTSID="{FB7BC5DB-029D-459A-BF2B-5D2B23CA6EE6}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate stgUpdates_Source1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{AF7DD98C-41B0-4938-B830-6927887DB996}"
+          SQLTask:SqlStatementSource="&#xA;        Truncate Table stgUpdates_Source1&#xA;       " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask"></SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\LoadSource1"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:DTSID="{DDDC629E-FFA5-4573-83BF-5E3D1A67834A}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="LoadSource1"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              name="Source1 Source"
+              refId="Package\LoadSource1\Source1 Source"
+              usesDispositions="true"
+              version="7">
+              <connections>
+                <connection
+                  connectionManagerID="Package.ConnectionManagers[SSISIncrementalLoad_Source]"
+                  connectionManagerRefId="Package.ConnectionManagers[SSISIncrementalLoad_Source]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection"
+                  refId="Package\LoadSource1\Source1 Source.Connections[OleDbConnection]"></connection>
+              </connections>
+              <outputs>
+                <output
+                  name="Output"
+                  refId="Package\LoadSource1\Source1 Source.Outputs[Output]">
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      dataType="i4"
+                      name="ColID"
+                      refId="Package\LoadSource1\Source1 Source.Outputs[Output].ExternalColumns[ColID]"></externalMetadataColumn>
+                    <externalMetadataColumn
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="ColA"
+                      refId="Package\LoadSource1\Source1 Source.Outputs[Output].ExternalColumns[ColA]"></externalMetadataColumn>
+                    <externalMetadataColumn
+                      dataType="dbTimeStamp"
+                      name="ColB"
+                      refId="Package\LoadSource1\Source1 Source.Outputs[Output].ExternalColumns[ColB]"></externalMetadataColumn>
+                    <externalMetadataColumn
+                      dataType="i4"
+                      name="ColC"
+                      refId="Package\LoadSource1\Source1 Source.Outputs[Output].ExternalColumns[ColC]"></externalMetadataColumn>
+                  </externalMetadataColumns>
+                  <outputColumns>
+                    <outputColumn
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\LoadSource1\Source1 Source.Outputs[Output].ExternalColumns[ColID]"
+                      lineageId="Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColID]"
+                      name="ColID"
+                      refId="Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColID]"
+                      truncationRowDisposition="FailComponent"></outputColumn>
+                    <outputColumn
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\LoadSource1\Source1 Source.Outputs[Output].ExternalColumns[ColA]"
+                      length="10"
+                      lineageId="Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColA]"
+                      name="ColA"
+                      refId="Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColA]"
+                      truncationRowDisposition="FailComponent"></outputColumn>
+                    <outputColumn
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\LoadSource1\Source1 Source.Outputs[Output].ExternalColumns[ColB]"
+                      lineageId="Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColB]"
+                      name="ColB"
+                      refId="Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColB]"
+                      truncationRowDisposition="FailComponent"></outputColumn>
+                    <outputColumn
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\LoadSource1\Source1 Source.Outputs[Output].ExternalColumns[ColC]"
+                      lineageId="Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColC]"
+                      name="ColC"
+                      refId="Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColC]"
+                      truncationRowDisposition="FailComponent"></outputColumn>
+                  </outputColumns>
+                </output>
+                <output
+                  isErrorOut="true"
+                  name="Error"
+                  refId="Package\LoadSource1\Source1 Source.Outputs[Error]">
+                  <externalMetadataColumns></externalMetadataColumns>
+                  <outputColumns>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\LoadSource1\Source1 Source.Outputs[Error].Columns[ColID]"
+                      name="ColID"
+                      refId="Package\LoadSource1\Source1 Source.Outputs[Error].Columns[ColID]"></outputColumn>
+                    <outputColumn
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\LoadSource1\Source1 Source.Outputs[Error].Columns[ColA]"
+                      name="ColA"
+                      refId="Package\LoadSource1\Source1 Source.Outputs[Error].Columns[ColA]"></outputColumn>
+                    <outputColumn
+                      dataType="dbTimeStamp"
+                      lineageId="Package\LoadSource1\Source1 Source.Outputs[Error].Columns[ColB]"
+                      name="ColB"
+                      refId="Package\LoadSource1\Source1 Source.Outputs[Error].Columns[ColB]"></outputColumn>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\LoadSource1\Source1 Source.Outputs[Error].Columns[ColC]"
+                      name="ColC"
+                      refId="Package\LoadSource1\Source1 Source.Outputs[Error].Columns[ColC]"></outputColumn>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\LoadSource1\Source1 Source.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      refId="Package\LoadSource1\Source1 Source.Outputs[Error].Columns[ErrorCode]"
+                      specialFlags="1"></outputColumn>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\LoadSource1\Source1 Source.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      refId="Package\LoadSource1\Source1 Source.Outputs[Error].Columns[ErrorColumn]"
+                      specialFlags="2"></outputColumn>
+                  </outputColumns>
+                </output>
+              </outputs>
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+										SELECT [ColID], [ColA], [ColB], [ColC] FROM [dbo].[Source1]
+									</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+            </component>
+            <component
+              componentClassID="{671046B0-AA63-4C9F-90E4-C06E0B710CE3}"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;5"
+              name="Correlate"
+              refId="Package\LoadSource1\Correlate"
+              usesDispositions="true"
+              version="6">
+              <connections>
+                <connection
+                  connectionManagerID="Package.ConnectionManagers[SSISIncrementalLoad_Stage]"
+                  connectionManagerRefId="Package.ConnectionManagers[SSISIncrementalLoad_Stage]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection"
+                  refId="Package\LoadSource1\Correlate.Connections[OleDbConnection]"></connection>
+              </connections>
+              <inputs>
+                <input
+                  name="Source1 Source_Output_Correlate"
+                  refId="Package\LoadSource1\Correlate.Inputs[Source1 Source_Output_Correlate]">
+                  <externalMetadataColumns></externalMetadataColumns>
+                  <inputColumns>
+                    <inputColumn
+                      cachedDataType="i4"
+                      cachedName="ColID"
+                      lineageId="Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColID]"
+                      name="ColID"
+                      refId="Package\LoadSource1\Correlate.Inputs[Source1 Source_Output_Correlate].Columns[ColID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">ColID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn"></property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Match"
+                  refId="Package\LoadSource1\Correlate.Outputs[Match]"
+                  synchronousInputId="Package\LoadSource1\Correlate.Inputs[Source1 Source_Output_Correlate]">
+                  <externalMetadataColumns></externalMetadataColumns>
+                  <outputColumns>
+                    <outputColumn
+                      dataType="i4"
+                      errorOrTruncationOperation="CopyColumn"
+                      lineageId="Package\LoadSource1\Correlate.Outputs[Match].Columns[Dest_ColID]"
+                      name="Dest_ColID"
+                      refId="Package\LoadSource1\Correlate.Outputs[Match].Columns[Dest_ColID]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">ColID</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="CopyColumn"
+                      length="10"
+                      lineageId="Package\LoadSource1\Correlate.Outputs[Match].Columns[Dest_ColA]"
+                      name="Dest_ColA"
+                      refId="Package\LoadSource1\Correlate.Outputs[Match].Columns[Dest_ColA]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">ColA</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="CopyColumn"
+                      lineageId="Package\LoadSource1\Correlate.Outputs[Match].Columns[Dest_ColB]"
+                      name="Dest_ColB"
+                      refId="Package\LoadSource1\Correlate.Outputs[Match].Columns[Dest_ColB]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">ColB</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      dataType="i4"
+                      errorOrTruncationOperation="CopyColumn"
+                      lineageId="Package\LoadSource1\Correlate.Outputs[Match].Columns[Dest_ColC]"
+                      name="Dest_ColC"
+                      refId="Package\LoadSource1\Correlate.Outputs[Match].Columns[Dest_ColC]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">ColC</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                </output>
+                <output
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="NoMatch"
+                  refId="Package\LoadSource1\Correlate.Outputs[NoMatch]"
+                  synchronousInputId="Package\LoadSource1\Correlate.Inputs[Source1 Source_Output_Correlate]">
+                  <externalMetadataColumns></externalMetadataColumns>
+                </output>
+                <output
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  refId="Package\LoadSource1\Correlate.Outputs[Error]"
+                  synchronousInputId="Package\LoadSource1\Correlate.Inputs[Source1 Source_Output_Correlate]">
+                  <externalMetadataColumns></externalMetadataColumns>
+                  <outputColumns>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\LoadSource1\Correlate.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      refId="Package\LoadSource1\Correlate.Outputs[Error].Columns[ErrorCode]"
+                      specialFlags="1"></outputColumn>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\LoadSource1\Correlate.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      refId="Package\LoadSource1\Correlate.Outputs[Error].Columns[ErrorColumn]"
+                      specialFlags="2"></outputColumn>
+                  </outputColumns>
+                </output>
+              </outputs>
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">
+										SELECT [ColID], [ColA], [ColB], [ColC] FROM dbo.Source1
+									</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (
+										SELECT [ColID], [ColA], [ColB], [ColC] FROM dbo.Source1
+									) [refTable] where [refTable].[ColID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;
+  &lt;referenceColumns&gt;
+    &lt;referenceColumn name="ColID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="ColA" dataType="DT_STR" length="10" precision="0" scale="0" codePage="1252" /&gt;
+    &lt;referenceColumn name="ColB" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="ColC" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0" /&gt;
+  &lt;/referenceColumns&gt;
+&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+            </component>
+            <component
+              componentClassID="{7F88F654-4E20-4D14-84F4-AF9C925D3087}"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              name="Filter"
+              refId="Package\LoadSource1\Filter"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  name="Correlate_Match_Filter"
+                  refId="Package\LoadSource1\Filter.Inputs[Correlate_Match_Filter]">
+                  <externalMetadataColumns></externalMetadataColumns>
+                  <inputColumns>
+                    <inputColumn
+                      cachedDataType="i4"
+                      cachedName="ColID"
+                      lineageId="Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColID]"
+                      name="ColID"
+                      refId="Package\LoadSource1\Filter.Inputs[Correlate_Match_Filter].Columns[ColID]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="i4"
+                      cachedName="Dest_ColID"
+                      lineageId="Package\LoadSource1\Correlate.Outputs[Match].Columns[Dest_ColID]"
+                      name="Dest_ColID"
+                      refId="Package\LoadSource1\Filter.Inputs[Correlate_Match_Filter].Columns[Dest_ColID]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="str"
+                      cachedName="ColA"
+                      lineageId="Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColA]"
+                      name="ColA"
+                      refId="Package\LoadSource1\Filter.Inputs[Correlate_Match_Filter].Columns[ColA]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="str"
+                      cachedName="Dest_ColA"
+                      lineageId="Package\LoadSource1\Correlate.Outputs[Match].Columns[Dest_ColA]"
+                      name="Dest_ColA"
+                      refId="Package\LoadSource1\Filter.Inputs[Correlate_Match_Filter].Columns[Dest_ColA]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ColB"
+                      lineageId="Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColB]"
+                      name="ColB"
+                      refId="Package\LoadSource1\Filter.Inputs[Correlate_Match_Filter].Columns[ColB]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Dest_ColB"
+                      lineageId="Package\LoadSource1\Correlate.Outputs[Match].Columns[Dest_ColB]"
+                      name="Dest_ColB"
+                      refId="Package\LoadSource1\Filter.Inputs[Correlate_Match_Filter].Columns[Dest_ColB]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="i4"
+                      cachedName="ColC"
+                      lineageId="Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColC]"
+                      name="ColC"
+                      refId="Package\LoadSource1\Filter.Inputs[Correlate_Match_Filter].Columns[ColC]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="i4"
+                      cachedName="Dest_ColC"
+                      lineageId="Package\LoadSource1\Correlate.Outputs[Match].Columns[Dest_ColC]"
+                      name="Dest_ColC"
+                      refId="Package\LoadSource1\Filter.Inputs[Correlate_Match_Filter].Columns[Dest_ColC]"></inputColumn>
+                  </inputColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Changed Rows"
+                  refId="Package\LoadSource1\Filter.Outputs[Changed Rows]"
+                  synchronousInputId="Package\LoadSource1\Filter.Inputs[Correlate_Match_Filter]"
+                  truncationRowDisposition="FailComponent">
+                  <externalMetadataColumns></externalMetadataColumns>
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      name="Expression">
+												(#{Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColID]} != #{Package\LoadSource1\Correlate.Outputs[Match].Columns[Dest_ColID]}) || (#{Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColA]} != #{Package\LoadSource1\Correlate.Outputs[Match].Columns[Dest_ColA]}) || (#{Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColB]} != #{Package\LoadSource1\Correlate.Outputs[Match].Columns[Dest_ColB]}) || (#{Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColC]} != #{Package\LoadSource1\Correlate.Outputs[Match].Columns[Dest_ColC]})
+											</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      expressionType="Notify"
+                      name="FriendlyExpression">
+												(ColID != Dest_ColID) || (ColA != Dest_ColA) || (ColB != Dest_ColB) || (ColC != Dest_ColC)
+											</property>
+                    <property
+                      dataType="System.Int32"
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                </output>
+                <output
+                  exclusionGroup="1"
+                  name="Default"
+                  refId="Package\LoadSource1\Filter.Outputs[Default]"
+                  synchronousInputId="Package\LoadSource1\Filter.Inputs[Correlate_Match_Filter]">
+                  <externalMetadataColumns></externalMetadataColumns>
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                </output>
+                <output
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  refId="Package\LoadSource1\Filter.Outputs[Error]"
+                  synchronousInputId="Package\LoadSource1\Filter.Inputs[Correlate_Match_Filter]">
+                  <externalMetadataColumns></externalMetadataColumns>
+                  <outputColumns>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\LoadSource1\Filter.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      refId="Package\LoadSource1\Filter.Outputs[Error].Columns[ErrorCode]"
+                      specialFlags="1"></outputColumn>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\LoadSource1\Filter.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      refId="Package\LoadSource1\Filter.Outputs[Error].Columns[ErrorColumn]"
+                      specialFlags="2"></outputColumn>
+                  </outputColumns>
+                </output>
+              </outputs>
+            </component>
+            <component
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              name="stgUpdates_Source1"
+              refId="Package\LoadSource1\stgUpdates_Source1"
+              usesDispositions="true"
+              version="4">
+              <connections>
+                <connection
+                  connectionManagerID="Package.ConnectionManagers[SSISIncrementalLoad_Stage]"
+                  connectionManagerRefId="Package.ConnectionManagers[SSISIncrementalLoad_Stage]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection"
+                  refId="Package\LoadSource1\stgUpdates_Source1.Connections[OleDbConnection]"></connection>
+              </connections>
+              <inputs>
+                <input
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Filter_Changed Rows_stgUpdates_Source1"
+                  refId="Package\LoadSource1\stgUpdates_Source1.Inputs[Filter_Changed Rows_stgUpdates_Source1]">
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      dataType="i4"
+                      name="ColID"
+                      refId="Package\LoadSource1\stgUpdates_Source1.Inputs[Filter_Changed Rows_stgUpdates_Source1].ExternalColumns[ColID]"></externalMetadataColumn>
+                    <externalMetadataColumn
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="ColA"
+                      refId="Package\LoadSource1\stgUpdates_Source1.Inputs[Filter_Changed Rows_stgUpdates_Source1].ExternalColumns[ColA]"></externalMetadataColumn>
+                    <externalMetadataColumn
+                      dataType="dbTimeStamp"
+                      name="ColB"
+                      refId="Package\LoadSource1\stgUpdates_Source1.Inputs[Filter_Changed Rows_stgUpdates_Source1].ExternalColumns[ColB]"></externalMetadataColumn>
+                    <externalMetadataColumn
+                      dataType="i4"
+                      name="ColC"
+                      refId="Package\LoadSource1\stgUpdates_Source1.Inputs[Filter_Changed Rows_stgUpdates_Source1].ExternalColumns[ColC]"></externalMetadataColumn>
+                  </externalMetadataColumns>
+                  <inputColumns>
+                    <inputColumn
+                      cachedDataType="i4"
+                      cachedName="ColID"
+                      externalMetadataColumnId="Package\LoadSource1\stgUpdates_Source1.Inputs[Filter_Changed Rows_stgUpdates_Source1].ExternalColumns[ColID]"
+                      lineageId="Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColID]"
+                      name="ColID"
+                      refId="Package\LoadSource1\stgUpdates_Source1.Inputs[Filter_Changed Rows_stgUpdates_Source1].Columns[ColID]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="str"
+                      cachedName="ColA"
+                      externalMetadataColumnId="Package\LoadSource1\stgUpdates_Source1.Inputs[Filter_Changed Rows_stgUpdates_Source1].ExternalColumns[ColA]"
+                      lineageId="Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColA]"
+                      name="ColA"
+                      refId="Package\LoadSource1\stgUpdates_Source1.Inputs[Filter_Changed Rows_stgUpdates_Source1].Columns[ColA]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ColB"
+                      externalMetadataColumnId="Package\LoadSource1\stgUpdates_Source1.Inputs[Filter_Changed Rows_stgUpdates_Source1].ExternalColumns[ColB]"
+                      lineageId="Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColB]"
+                      name="ColB"
+                      refId="Package\LoadSource1\stgUpdates_Source1.Inputs[Filter_Changed Rows_stgUpdates_Source1].Columns[ColB]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="i4"
+                      cachedName="ColC"
+                      externalMetadataColumnId="Package\LoadSource1\stgUpdates_Source1.Inputs[Filter_Changed Rows_stgUpdates_Source1].ExternalColumns[ColC]"
+                      lineageId="Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColC]"
+                      name="ColC"
+                      refId="Package\LoadSource1\stgUpdates_Source1.Inputs[Filter_Changed Rows_stgUpdates_Source1].Columns[ColC]"></inputColumn>
+                  </inputColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  refId="Package\LoadSource1\stgUpdates_Source1.Outputs[Error]"
+                  synchronousInputId="Package\LoadSource1\stgUpdates_Source1.Inputs[Filter_Changed Rows_stgUpdates_Source1]">
+                  <externalMetadataColumns></externalMetadataColumns>
+                  <outputColumns>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\LoadSource1\stgUpdates_Source1.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      refId="Package\LoadSource1\stgUpdates_Source1.Outputs[Error].Columns[ErrorCode]"
+                      specialFlags="1"></outputColumn>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\LoadSource1\stgUpdates_Source1.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      refId="Package\LoadSource1\stgUpdates_Source1.Outputs[Error].Columns[ErrorColumn]"
+                      specialFlags="2"></outputColumn>
+                  </outputColumns>
+                </output>
+              </outputs>
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">dbo.stgUpdates_Source1</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+            </component>
+            <component
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              name="Source1 Destination"
+              refId="Package\LoadSource1\Source1 Destination"
+              usesDispositions="true"
+              version="4">
+              <connections>
+                <connection
+                  connectionManagerID="Package.ConnectionManagers[SSISIncrementalLoad_Stage]"
+                  connectionManagerRefId="Package.ConnectionManagers[SSISIncrementalLoad_Stage]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection"
+                  refId="Package\LoadSource1\Source1 Destination.Connections[OleDbConnection]"></connection>
+              </connections>
+              <inputs>
+                <input
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Correlate_NoMatch_Source1 Destination"
+                  refId="Package\LoadSource1\Source1 Destination.Inputs[Correlate_NoMatch_Source1 Destination]">
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      dataType="i4"
+                      name="ColID"
+                      refId="Package\LoadSource1\Source1 Destination.Inputs[Correlate_NoMatch_Source1 Destination].ExternalColumns[ColID]"></externalMetadataColumn>
+                    <externalMetadataColumn
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="ColA"
+                      refId="Package\LoadSource1\Source1 Destination.Inputs[Correlate_NoMatch_Source1 Destination].ExternalColumns[ColA]"></externalMetadataColumn>
+                    <externalMetadataColumn
+                      dataType="dbTimeStamp"
+                      name="ColB"
+                      refId="Package\LoadSource1\Source1 Destination.Inputs[Correlate_NoMatch_Source1 Destination].ExternalColumns[ColB]"></externalMetadataColumn>
+                    <externalMetadataColumn
+                      dataType="i4"
+                      name="ColC"
+                      refId="Package\LoadSource1\Source1 Destination.Inputs[Correlate_NoMatch_Source1 Destination].ExternalColumns[ColC]"></externalMetadataColumn>
+                  </externalMetadataColumns>
+                  <inputColumns>
+                    <inputColumn
+                      cachedDataType="i4"
+                      cachedName="ColID"
+                      externalMetadataColumnId="Package\LoadSource1\Source1 Destination.Inputs[Correlate_NoMatch_Source1 Destination].ExternalColumns[ColID]"
+                      lineageId="Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColID]"
+                      name="ColID"
+                      refId="Package\LoadSource1\Source1 Destination.Inputs[Correlate_NoMatch_Source1 Destination].Columns[ColID]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="str"
+                      cachedName="ColA"
+                      externalMetadataColumnId="Package\LoadSource1\Source1 Destination.Inputs[Correlate_NoMatch_Source1 Destination].ExternalColumns[ColA]"
+                      lineageId="Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColA]"
+                      name="ColA"
+                      refId="Package\LoadSource1\Source1 Destination.Inputs[Correlate_NoMatch_Source1 Destination].Columns[ColA]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ColB"
+                      externalMetadataColumnId="Package\LoadSource1\Source1 Destination.Inputs[Correlate_NoMatch_Source1 Destination].ExternalColumns[ColB]"
+                      lineageId="Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColB]"
+                      name="ColB"
+                      refId="Package\LoadSource1\Source1 Destination.Inputs[Correlate_NoMatch_Source1 Destination].Columns[ColB]"></inputColumn>
+                    <inputColumn
+                      cachedDataType="i4"
+                      cachedName="ColC"
+                      externalMetadataColumnId="Package\LoadSource1\Source1 Destination.Inputs[Correlate_NoMatch_Source1 Destination].ExternalColumns[ColC]"
+                      lineageId="Package\LoadSource1\Source1 Source.Outputs[Output].Columns[ColC]"
+                      name="ColC"
+                      refId="Package\LoadSource1\Source1 Destination.Inputs[Correlate_NoMatch_Source1 Destination].Columns[ColC]"></inputColumn>
+                  </inputColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error"
+                  refId="Package\LoadSource1\Source1 Destination.Outputs[Error]"
+                  synchronousInputId="Package\LoadSource1\Source1 Destination.Inputs[Correlate_NoMatch_Source1 Destination]">
+                  <externalMetadataColumns></externalMetadataColumns>
+                  <outputColumns>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\LoadSource1\Source1 Destination.Outputs[Error].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      refId="Package\LoadSource1\Source1 Destination.Outputs[Error].Columns[ErrorCode]"
+                      specialFlags="1"></outputColumn>
+                    <outputColumn
+                      dataType="i4"
+                      lineageId="Package\LoadSource1\Source1 Destination.Outputs[Error].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      refId="Package\LoadSource1\Source1 Destination.Outputs[Error].Columns[ErrorColumn]"
+                      specialFlags="2"></outputColumn>
+                  </outputColumns>
+                </output>
+              </outputs>
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">dbo.Source1</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+            </component>
+          </components>
+          <paths>
+            <path
+              endId="Package\LoadSource1\Correlate.Inputs[Source1 Source_Output_Correlate]"
+              name="Source1 Source_Output_Correlate"
+              refId="Package\LoadSource1.Paths[Source1 Source_Output_Correlate]"
+              startId="Package\LoadSource1\Source1 Source.Outputs[Output]"></path>
+            <path
+              endId="Package\LoadSource1\Source1 Destination.Inputs[Correlate_NoMatch_Source1 Destination]"
+              name="Correlate_NoMatch_Source1 Destination"
+              refId="Package\LoadSource1.Paths[Correlate_NoMatch_Source1 Destination]"
+              startId="Package\LoadSource1\Correlate.Outputs[NoMatch]"></path>
+            <path
+              endId="Package\LoadSource1\Filter.Inputs[Correlate_Match_Filter]"
+              name="Correlate_Match_Filter"
+              refId="Package\LoadSource1.Paths[Correlate_Match_Filter]"
+              startId="Package\LoadSource1\Correlate.Outputs[Match]"></path>
+            <path
+              endId="Package\LoadSource1\stgUpdates_Source1.Inputs[Filter_Changed Rows_stgUpdates_Source1]"
+              name="Filter_Changed Rows_stgUpdates_Source1"
+              refId="Package\LoadSource1.Paths[Filter_Changed Rows_stgUpdates_Source1]"
+              startId="Package\LoadSource1\Filter.Outputs[Changed Rows]"></path>
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Apply stgUpdates_Source1"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:DTSID="{91378601-D7A4-430A-B711-A54E2D9BAD1D}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Apply stgUpdates_Source1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{AF7DD98C-41B0-4938-B830-6927887DB996}"
+          SQLTask:SqlStatementSource="&#xA;        Update Dest Set Dest.ColA = Upd.ColA,Dest.ColB = Upd.ColB,Dest.ColC = Upd.ColC From [dbo].[Source1] Dest Join [dbo].[stgUpdates_Source1] Upd On Upd.ColID = Dest.ColID&#xA;       " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask"></SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_Truncate stgUpdates_Source1_To_LoadSource1]"
+      DTS:CreationName=""
+      DTS:DTSID="{7CC4F06E-40AF-43B2-92DB-DFFBC72329F1}"
+      DTS:From="Package\Truncate stgUpdates_Source1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_Truncate stgUpdates_Source1_To_LoadSource1"
+      DTS:To="Package\LoadSource1"></DTS:PrecedenceConstraint>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_LoadSource1_To_Apply stgUpdates_Source1]"
+      DTS:CreationName=""
+      DTS:DTSID="{434C0FDF-FF98-439C-851F-D507332DE149}"
+      DTS:From="Package\LoadSource1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_LoadSource1_To_Apply stgUpdates_Source1"
+      DTS:To="Package\Apply stgUpdates_Source1"></DTS:PrecedenceConstraint>
+  </DTS:PrecedenceConstraints>
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+</DTS:Executable>

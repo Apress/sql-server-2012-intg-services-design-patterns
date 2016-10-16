@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "SSIS Design Patterns", "SSIS Design Patterns\SSIS Design Patterns.dtproj", "{A9A3B5F2-879C-407F-9598-8ACC2A72301E}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://andyi7:8080/tfs/demos
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = SSIS\u0020Design\u0020Patterns\\SSIS\u0020Design\u0020Patterns.dtproj
+		SccProjectName1 = SSIS\u0020Design\u0020Patterns
+		SccLocalPath1 = SSIS\u0020Design\u0020Patterns
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A9A3B5F2-879C-407F-9598-8ACC2A72301E}.Development|Default.ActiveCfg = Development
+		{A9A3B5F2-879C-407F-9598-8ACC2A72301E}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

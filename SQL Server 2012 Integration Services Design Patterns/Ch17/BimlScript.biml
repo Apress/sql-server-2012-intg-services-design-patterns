@@ -1,0 +1,60 @@
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+  <Connections>
+    <Connection Name="SSISIncrementalLoad_Source" ConnectionString="Data Source=(local);Initial Catalog=SSISIncrementalLoad_Source;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS.2012IncrementalLoadPackage.SSISIncrementalLoad_Source.OLEDB;" />
+    <Connection Name="SSISIncrementalLoad_Dest" ConnectionString="Data Source=(local);Initial Catalog=SSISIncrementalLoad_Dest;Provider=SQLNCLI11.1;OLE DB Services=1;Integrated Security=SSPI;Application Name=SSIS.2012IncrementalLoadPackage.SSISIncrementalLoad_Dest.OLEDB;" />
+  </Connections>
+  <Databases>
+    <Database Name="SSISIncrementalLoad_Source" ConnectionName="SSISIncrementalLoad_Source" />
+    <Database Name="SSISIncrementalLoad_Dest" ConnectionName="SSISIncrementalLoad_Dest" />
+  </Databases>
+    <Packages>
+        <Package Name="2012IncrementalLoadPackage" ConstraintMode="Parallel" ProtectionLevel="EncryptSensitiveWithUserKey">
+            <Tasks>
+                <ExecuteSQL Name="Truncate stgUpdates" ConnectionName="SSISIncrementalLoad_Dest">
+                    <DirectInput>Truncate Table stgUpdates</DirectInput>
+                </ExecuteSQL>
+                <Dataflow Name="Load tblDest">
+                    <PrecedenceConstraints>
+                        <Inputs>
+                            <Input OutputPathName="Truncate stgUpdates.Output" />
+                        </Inputs>
+                    </PrecedenceConstraints>
+                    <Transformations>
+                        <OleDbSource Name="tblSource Source" ConnectionName="SSISIncrementalLoad_Source">
+                            <ExternalTableInput Table="dbo.tblSource" />
+                        </OleDbSource>
+                        <OleDbDestination Name="tblDest Destination" ConnectionName="SSISIncrementalLoad_Dest">
+                            <InputPath OutputPathName="tblDest Lookup.NoMatch" />
+                        	<ExternalTableOutput Table="dbo.tblDest" />
+                        </OleDbDestination>
+                        <Lookup Name="tblDest Lookup" OleDbConnectionName="SSISIncrementalLoad_Dest" NoMatchBehavior="RedirectRowsToNoMatchOutput">
+                            <InputPath OutputPathName="tblSource Source.Output" />
+                        	<ExternalTableInput Table="dbo.tblDest" />
+                            <Inputs>
+                                <Column SourceColumn="ColID" TargetColumn="ColID" />
+                            </Inputs>
+                        </Lookup>
+                        <OleDbDestination Name="stgUpdates" ConnectionName="SSISIncrementalLoad_Dest">
+                            <InputPath OutputPathName="tblDest Lookup.Match" />
+                        	<ExternalTableOutput Table="dbo.stgUpdates" />
+                        </OleDbDestination>
+                    </Transformations>
+                </Dataflow>
+                <ExecuteSQL Name="Apply stgUpdates" ConnectionName="SSISIncrementalLoad_Dest">
+                    <PrecedenceConstraints>
+                        <Inputs>
+                            <Input OutputPathName="Load tblDest.Output" />
+                        </Inputs>
+                    </PrecedenceConstraints>
+                	<DirectInput>Update Dest
+ Set Dest.ColA = Upd.ColA
+      ,Dest.ColB = Upd.ColB
+      ,Dest.ColC = Upd.ColC
+From tblDest Dest
+Join stgUpdates Upd
+  On Upd.ColID = Dest.ColID</DirectInput>
+                </ExecuteSQL>
+            </Tasks>
+        </Package>
+    </Packages>
+</Biml>

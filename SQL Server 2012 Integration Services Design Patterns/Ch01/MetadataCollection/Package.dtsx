@@ -1,0 +1,1604 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/28/2012 4:10:46 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="SQLFOOL"
+  DTS:CreatorName="SQLFool\Michelle"
+  DTS:DTSID="{449B62E1-FDA2-45BD-AD24-E587FAF01077}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.2100.60"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{5D302B71-47A6-4510-83AD-AB34F7A407E2}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DynamicSQLServerInstance]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{11EE9F48-69BB-4DB9-9984-5DEEEA52D804}"
+      DTS:ObjectName="DynamicSQLServerInstance">
+      <DTS:PropertyExpression
+        DTS:Name="ServerName">@[User::SQLServerInstanceName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=;Initial Catalog=master;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SQLFOOL\SQLFOOL2012.dbaCentralLogging]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{EEB09CF3-73FB-417D-A368-998F483345EB}"
+      DTS:ObjectName="SQLFOOL\SQLFOOL2012.dbaCentralLogging">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQLFOOL\SQLFOOL2012;Initial Catalog=dbaCentralLogging;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{54F6BFB7-F602-427B-9588-390BDD779D78}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SQLServerInstanceName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{11A08E9B-BFDB-4BB3-8BCB-995397ED8822}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="SQLServerList">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Foreach SQL Server Instance"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach SQL Server Instance"
+      DTS:DTSID="{F6D28480-55C4-4BAD-B53A-460D6700EA8F}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach SQL Server Instance">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.SqlServer.Dts.Runtime.Enumerators.ADO.ForEachADOEnumerator, Microsoft.SqlServer.ForEachADOEnumerator, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+        DTS:DTSID="{F5D4B330-2670-481D-B8F8-7E33BDF1A54B}"
+        DTS:ObjectName="{F5D4B330-2670-481D-B8F8-7E33BDF1A54B}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::SQLServerList" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach SQL Server Instance\Database Size"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{FD9968AB-C02F-4DC1-8B90-CA91E4F6547D}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Database Size"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination"
+                  componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Central Logging Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[dba_monitor_databaseGrowth]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[SQLFOOL\SQLFOOL2012.dbaCentralLogging]"
+                      connectionManagerRefId="Package.ConnectionManagers[SQLFOOL\SQLFOOL2012.dbaCentralLogging]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination.Inputs[OLE DB Destination Input].Columns[captureDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="captureDate"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[captureDate]"
+                          lineageId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[captureDate]" />
+                        <inputColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination.Inputs[OLE DB Destination Input].Columns[serverName]"
+                          cachedDataType="wstr"
+                          cachedLength="128"
+                          cachedName="serverName"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[serverName]"
+                          lineageId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[serverName]" />
+                        <inputColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination.Inputs[OLE DB Destination Input].Columns[databaseName]"
+                          cachedDataType="wstr"
+                          cachedLength="128"
+                          cachedName="databaseName"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[databaseName]"
+                          lineageId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[databaseName]" />
+                        <inputColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination.Inputs[OLE DB Destination Input].Columns[dataSizeInKB]"
+                          cachedDataType="i8"
+                          cachedName="dataSizeInKB"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[dataSizeInKB]"
+                          lineageId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[dataSizeInKB]" />
+                        <inputColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination.Inputs[OLE DB Destination Input].Columns[logSizeInKB]"
+                          cachedDataType="i8"
+                          cachedName="logSizeInKB"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[logSizeInKB]"
+                          lineageId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[logSizeInKB]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[log_id]"
+                          dataType="i4"
+                          name="log_id" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[captureDate]"
+                          dataType="dbTimeStamp"
+                          name="captureDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[serverName]"
+                          dataType="wstr"
+                          length="128"
+                          name="serverName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[databaseName]"
+                          dataType="wstr"
+                          length="128"
+                          name="databaseName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[dataSizeInKB]"
+                          dataType="i8"
+                          name="dataSizeInKB" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[logSizeInKB]"
+                          dataType="i8"
+                          name="logSizeInKB" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source"
+                  componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Dynamic SQL Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT GETDATE()          AS [captureDate]
+    , @@SERVERNAME      AS [serverName]
+    , instance_name           AS [databaseName]
+    , SUM(
+        CASE 
+            WHEN counter_name = 'Data File(s) Size (KB)' 
+            THEN cntr_value
+        END
+      )                                    AS 'dataSizeInKB'
+    , SUM(
+        CASE 
+            WHEN counter_name = 'Log File(s) Size (KB)' 
+            THEN cntr_value
+        END
+      )                                   AS 'logSizeInKB'
+FROM sys.dm_os_performance_counters
+WHERE counter_name IN ('Data File(s) Size (KB)'
+                     , 'Log File(s) Size (KB)')
+GROUP BY instance_name;</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[DynamicSQLServerInstance]"
+                      connectionManagerRefId="Package.ConnectionManagers[DynamicSQLServerInstance]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[captureDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[captureDate]"
+                          lineageId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[captureDate]"
+                          name="captureDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[serverName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[serverName]"
+                          length="128"
+                          lineageId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[serverName]"
+                          name="serverName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[databaseName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[databaseName]"
+                          length="128"
+                          lineageId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[databaseName]"
+                          name="databaseName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[dataSizeInKB]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[dataSizeInKB]"
+                          lineageId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[dataSizeInKB]"
+                          name="dataSizeInKB"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[logSizeInKB]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[logSizeInKB]"
+                          lineageId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[logSizeInKB]"
+                          name="logSizeInKB"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[captureDate]"
+                          dataType="dbTimeStamp"
+                          name="captureDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[serverName]"
+                          dataType="wstr"
+                          length="128"
+                          name="serverName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[databaseName]"
+                          dataType="wstr"
+                          length="128"
+                          name="databaseName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[dataSizeInKB]"
+                          dataType="i8"
+                          name="dataSizeInKB" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[logSizeInKB]"
+                          dataType="i8"
+                          name="logSizeInKB" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[captureDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[captureDate]"
+                          name="captureDate" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[serverName]"
+                          dataType="wstr"
+                          length="128"
+                          lineageId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[serverName]"
+                          name="serverName" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[databaseName]"
+                          dataType="wstr"
+                          length="128"
+                          lineageId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[databaseName]"
+                          name="databaseName" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[dataSizeInKB]"
+                          dataType="i8"
+                          lineageId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[dataSizeInKB]"
+                          name="dataSizeInKB" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[logSizeInKB]"
+                          dataType="i8"
+                          lineageId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[logSizeInKB]"
+                          name="logSizeInKB" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Foreach SQL Server Instance\Database Size.Paths[OLE DB Source Output]"
+                  endId="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach SQL Server Instance\Unused Indexes"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{1984c76a-30fa-4c51-be06-e11ff67d6bb7}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Unused Indexes"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination"
+                  componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Central Logging Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[dba_monitor_unusedIndexes]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[SQLFOOL\SQLFOOL2012.dbaCentralLogging]"
+                      connectionManagerRefId="Package.ConnectionManagers[SQLFOOL\SQLFOOL2012.dbaCentralLogging]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].Columns[captureDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="captureDate"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[captureDate]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[captureDate]" />
+                        <inputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].Columns[serverName]"
+                          cachedDataType="wstr"
+                          cachedLength="128"
+                          cachedName="serverName"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[serverName]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[serverName]" />
+                        <inputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].Columns[databaseName]"
+                          cachedDataType="wstr"
+                          cachedLength="128"
+                          cachedName="databaseName"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[databaseName]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[databaseName]" />
+                        <inputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].Columns[schemaName]"
+                          cachedDataType="wstr"
+                          cachedLength="128"
+                          cachedName="schemaName"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[schemaName]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[schemaName]" />
+                        <inputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].Columns[tableName]"
+                          cachedDataType="wstr"
+                          cachedLength="128"
+                          cachedName="tableName"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[tableName]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[tableName]" />
+                        <inputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].Columns[indexName]"
+                          cachedDataType="wstr"
+                          cachedLength="128"
+                          cachedName="indexName"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[indexName]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[indexName]" />
+                        <inputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].Columns[indexType]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="indexType"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[indexType]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[indexType]" />
+                        <inputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].Columns[isFiltered]"
+                          cachedDataType="bool"
+                          cachedName="isFiltered"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[isFiltered]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[isFiltered]" />
+                        <inputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].Columns[isPartitioned]"
+                          cachedDataType="bool"
+                          cachedName="isPartitioned"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[isPartitioned]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[isPartitioned]" />
+                        <inputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].Columns[numberOfRows]"
+                          cachedDataType="i8"
+                          cachedName="numberOfRows"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[numberOfRows]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[numberOfRows]" />
+                        <inputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].Columns[userSeeksSinceReboot]"
+                          cachedDataType="i8"
+                          cachedName="userSeeksSinceReboot"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[userSeeksSinceReboot]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[userSeeksSinceReboot]" />
+                        <inputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].Columns[userScansSinceReboot]"
+                          cachedDataType="i8"
+                          cachedName="userScansSinceReboot"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[userScansSinceReboot]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[userScansSinceReboot]" />
+                        <inputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].Columns[userLookupsSinceReboot]"
+                          cachedDataType="i8"
+                          cachedName="userLookupsSinceReboot"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[userLookupsSinceReboot]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[userLookupsSinceReboot]" />
+                        <inputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].Columns[userUpdatesSinceReboot]"
+                          cachedDataType="i8"
+                          cachedName="userUpdatesSinceReboot"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[userUpdatesSinceReboot]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[userUpdatesSinceReboot]" />
+                        <inputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].Columns[indexSizeInMB]"
+                          cachedDataType="i8"
+                          cachedName="indexSizeInMB"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[indexSizeInMB]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[indexSizeInMB]" />
+                        <inputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].Columns[lastReboot]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="lastReboot"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[lastReboot]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[lastReboot]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[log_id]"
+                          dataType="i4"
+                          name="log_id" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[captureDate]"
+                          dataType="dbTimeStamp"
+                          name="captureDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[serverName]"
+                          dataType="wstr"
+                          length="128"
+                          name="serverName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[databaseName]"
+                          dataType="wstr"
+                          length="128"
+                          name="databaseName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[schemaName]"
+                          dataType="wstr"
+                          length="128"
+                          name="schemaName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[tableName]"
+                          dataType="wstr"
+                          length="128"
+                          name="tableName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[indexName]"
+                          dataType="wstr"
+                          length="128"
+                          name="indexName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[indexType]"
+                          dataType="wstr"
+                          length="60"
+                          name="indexType" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[isFiltered]"
+                          dataType="bool"
+                          name="isFiltered" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[isPartitioned]"
+                          dataType="bool"
+                          name="isPartitioned" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[numberOfRows]"
+                          dataType="i8"
+                          name="numberOfRows" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[userSeeksSinceReboot]"
+                          dataType="i8"
+                          name="userSeeksSinceReboot" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[userScansSinceReboot]"
+                          dataType="i8"
+                          name="userScansSinceReboot" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[userLookupsSinceReboot]"
+                          dataType="i8"
+                          name="userLookupsSinceReboot" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[userUpdatesSinceReboot]"
+                          dataType="i8"
+                          name="userUpdatesSinceReboot" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[indexSizeInMB]"
+                          dataType="i8"
+                          name="indexSizeInMB" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input].ExternalColumns[lastReboot]"
+                          dataType="dbTimeStamp"
+                          name="lastReboot" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source"
+                  componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Dynamic SQL Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">/* Create a variable to hold a list of indexes */
+DECLARE @Indexes    TABLE
+( serverName             NVARCHAR(128)
+, schemaName        SYSNAME
+, schemaID          INT
+, databaseName      SYSNAME
+, databaseID        INT
+, tableName         SYSNAME
+, objectID          INT
+, indexName         SYSNAME
+, indexID           INT
+, indexType         NVARCHAR(60)
+, isPrimaryKey      BIT
+, isUnique          BIT
+, isFiltered        BIT
+, isPartitioned     BIT
+, numberOfRows      BIGINT
+, totalPages        BIGINT);
+
+/* Iterate through all databases */
+INSERT INTO @Indexes (serverName, schemaName, schemaID, databaseName, databaseID, tableName, objectID, indexName, indexID, indexType, isUnique, isPrimaryKey, isFiltered, isPartitioned, numberOfRows, totalPages)
+EXECUTE sys.sp_MSforeachdb
+' USE ?; 
+SELECT @@SERVERNAME
+    , SCHEMA_NAME(t.schema_id)
+    , t.schema_id
+    , DB_NAME()
+    , DB_ID()
+    , t.name
+    , t.object_id
+    , i.name
+    , i.index_id
+    , i.type_desc
+    , i.is_primary_key
+    , i.is_unique
+    , i.has_filter
+    , CASE WHEN COUNT(p.partition_id) &gt; 1 THEN 1 ELSE 0 END
+    , SUM(p.rows)
+    , SUM(au.total_pages)
+FROM sys.tables             AS t WITH (NOLOCK)
+JOIN sys.indexes            AS i WITH (NOLOCK)
+ON i.object_id = t.object_id
+JOIN sys.partitions         AS p WITH (NOLOCK)
+ON p.object_id = i.object_id
+AND p.index_id = i.index_id
+JOIN sys.allocation_units   AS au WITH (NOLOCK)
+ON au.container_id = p.partition_id
+WHERE i.index_id &lt;&gt; 0 /* exclude heaps */
+GROUP BY SCHEMA_NAME(t.schema_id)
+, t.schema_id
+, t.name
+, t.object_id
+, i.name
+, i.index_id
+, i.type_desc
+, i.has_filter
+, i.is_unique
+, i.is_primary_key;';
+
+/* Retrieve index stats for return to our central repository */
+SELECT GETDATE()                AS [captureDate]
+    , i.serverName
+    , i.schemaName
+    , i.databaseName
+    , i.tableName
+    , i.indexName
+    , i.indexType
+    , i.isFiltered
+    , i.isPartitioned
+    , i.numberOfRows
+    , ddius.user_seeks          AS [userSeeksSinceReboot]
+    , ddius.user_scans          AS [userScansSinceReboot]
+    , ddius.user_lookups        AS [userLookupsSinceReboot]
+    , ddius.user_updates        AS [userUpdatesSinceReboot]
+    , (i.totalPages * 8) / 1024 AS [indexSizeInMB] /* pages are 8KB */
+    , dosi.sqlserver_start_time AS [lastReboot]
+FROM @Indexes                                    AS i
+JOIN sys.dm_db_index_usage_stats    AS ddius
+     ON i.databaseID = ddius.database_id
+    AND i.objectID = ddius.object_id
+    AND i.indexID = ddius.index_id
+CROSS APPLY sys.dm_os_sys_info      AS dosi
+WHERE /* exclude system databases */
+        i.databaseName    NOT IN ('master', 'msdb', 'tempdb', 'model') 
+    /* exclude unique indexes; assume they are serving a business function */
+    AND i.isUnique        = 0 
+    /* exclude primary keys; assume they are serving a business function */
+    AND i.isPrimaryKey  = 0 
+    /* no seeks have been performed since the last server reboot */
+    AND user_seeks         = 0;</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[DynamicSQLServerInstance]"
+                      connectionManagerRefId="Package.ConnectionManagers[DynamicSQLServerInstance]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[captureDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[captureDate]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[captureDate]"
+                          name="captureDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[serverName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[serverName]"
+                          length="128"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[serverName]"
+                          name="serverName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[databaseName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[databaseName]"
+                          length="128"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[databaseName]"
+                          name="databaseName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[schemaName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[schemaName]"
+                          length="128"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[schemaName]"
+                          name="schemaName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[tableName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[tableName]"
+                          length="128"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[tableName]"
+                          name="tableName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[indexName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[indexName]"
+                          length="128"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[indexName]"
+                          name="indexName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[indexType]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[indexType]"
+                          length="60"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[indexType]"
+                          name="indexType"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[isFiltered]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[isFiltered]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[isFiltered]"
+                          name="isFiltered"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[isPartitioned]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[isPartitioned]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[isPartitioned]"
+                          name="isPartitioned"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[numberOfRows]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[numberOfRows]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[numberOfRows]"
+                          name="numberOfRows"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[userSeeksSinceReboot]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[userSeeksSinceReboot]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[userSeeksSinceReboot]"
+                          name="userSeeksSinceReboot"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[userScansSinceReboot]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[userScansSinceReboot]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[userScansSinceReboot]"
+                          name="userScansSinceReboot"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[userLookupsSinceReboot]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[userLookupsSinceReboot]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[userLookupsSinceReboot]"
+                          name="userLookupsSinceReboot"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[userUpdatesSinceReboot]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[userUpdatesSinceReboot]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[userUpdatesSinceReboot]"
+                          name="userUpdatesSinceReboot"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[indexSizeInMB]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[indexSizeInMB]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[indexSizeInMB]"
+                          name="indexSizeInMB"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[lastReboot]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[lastReboot]"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].Columns[lastReboot]"
+                          name="lastReboot"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[captureDate]"
+                          dataType="dbTimeStamp"
+                          name="captureDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[serverName]"
+                          dataType="wstr"
+                          length="128"
+                          name="serverName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[databaseName]"
+                          dataType="wstr"
+                          length="128"
+                          name="databaseName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[schemaName]"
+                          dataType="wstr"
+                          length="128"
+                          name="schemaName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[tableName]"
+                          dataType="wstr"
+                          length="128"
+                          name="tableName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[indexName]"
+                          dataType="wstr"
+                          length="128"
+                          name="indexName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[indexType]"
+                          dataType="wstr"
+                          length="60"
+                          name="indexType" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[isFiltered]"
+                          dataType="bool"
+                          name="isFiltered" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[isPartitioned]"
+                          dataType="bool"
+                          name="isPartitioned" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[numberOfRows]"
+                          dataType="i8"
+                          name="numberOfRows" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[userSeeksSinceReboot]"
+                          dataType="i8"
+                          name="userSeeksSinceReboot" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[userScansSinceReboot]"
+                          dataType="i8"
+                          name="userScansSinceReboot" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[userLookupsSinceReboot]"
+                          dataType="i8"
+                          name="userLookupsSinceReboot" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[userUpdatesSinceReboot]"
+                          dataType="i8"
+                          name="userUpdatesSinceReboot" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[indexSizeInMB]"
+                          dataType="i8"
+                          name="indexSizeInMB" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output].ExternalColumns[lastReboot]"
+                          dataType="dbTimeStamp"
+                          name="lastReboot" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[captureDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[captureDate]"
+                          name="captureDate" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[serverName]"
+                          dataType="wstr"
+                          length="128"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[serverName]"
+                          name="serverName" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[schemaName]"
+                          dataType="wstr"
+                          length="128"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[schemaName]"
+                          name="schemaName" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[databaseName]"
+                          dataType="wstr"
+                          length="128"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[databaseName]"
+                          name="databaseName" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[tableName]"
+                          dataType="wstr"
+                          length="128"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[tableName]"
+                          name="tableName" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[indexName]"
+                          dataType="wstr"
+                          length="128"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[indexName]"
+                          name="indexName" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[indexType]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[indexType]"
+                          name="indexType" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[isFiltered]"
+                          dataType="bool"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[isFiltered]"
+                          name="isFiltered" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[isPartitioned]"
+                          dataType="bool"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[isPartitioned]"
+                          name="isPartitioned" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[numberOfRows]"
+                          dataType="i8"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[numberOfRows]"
+                          name="numberOfRows" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[userSeeksSinceReboot]"
+                          dataType="i8"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[userSeeksSinceReboot]"
+                          name="userSeeksSinceReboot" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[userScansSinceReboot]"
+                          dataType="i8"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[userScansSinceReboot]"
+                          name="userScansSinceReboot" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[userLookupsSinceReboot]"
+                          dataType="i8"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[userLookupsSinceReboot]"
+                          name="userLookupsSinceReboot" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[userUpdatesSinceReboot]"
+                          dataType="i8"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[userUpdatesSinceReboot]"
+                          name="userUpdatesSinceReboot" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[indexSizeInMB]"
+                          dataType="i8"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[indexSizeInMB]"
+                          name="indexSizeInMB" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[lastReboot]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[lastReboot]"
+                          name="lastReboot" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Foreach SQL Server Instance\Unused Indexes.Paths[OLE DB Source Output]"
+                  endId="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach SQL Server Instance\Update LastMonitored"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Update LastMonitored"
+          DTS:DTSID="{61C8EA76-DE1D-4EBE-92A1-FC7B7D302612}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update LastMonitored"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{EEB09CF3-73FB-417D-A368-998F483345EB}"
+              SQLTask:SqlStatementSource="UPDATE dbo.dba_monitor_SQLServerInstances &#xA;SET LastMonitored = GETDATE() &#xA;WHERE SQLServerInstance = ?;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::SQLServerInstanceName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="128" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach SQL Server Instance.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{779397E7-BC10-49AF-BFD6-A226830BE25E}"
+          DTS:From="Package\Foreach SQL Server Instance\Database Size"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Foreach SQL Server Instance\Unused Indexes" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach SQL Server Instance.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{8F7EB4F4-8947-45D1-B56A-95D5823AB149}"
+          DTS:From="Package\Foreach SQL Server Instance\Unused Indexes"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Foreach SQL Server Instance\Update LastMonitored" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{B1747D3B-E733-4636-9E03-0A5A453BE16E}"
+          DTS:ObjectName="{B1747D3B-E733-4636-9E03-0A5A453BE16E}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::SQLServerInstanceName" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Retrieve SQL Server Instances"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Retrieve SQL Server Instances"
+      DTS:DTSID="{17AAAA8C-12E8-4EA0-8736-DD4088A8254F}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Retrieve SQL Server Instances"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{EEB09CF3-73FB-417D-A368-998F483345EB}"
+          SQLTask:SqlStatementSource="SELECT SQLServerInstance FROM dbo.dba_monitor_SQLServerInstances;"
+          SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::SQLServerList" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{98237E7E-224D-49FC-A4BB-B6358FE0B805}"
+      DTS:From="Package\Retrieve SQL Server Instances"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Foreach SQL Server Instance" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="146,42"
+          Id="Package\Foreach SQL Server Instance\Database Size"
+          TopLeft="79.1666666666667,20" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Foreach SQL Server Instance\Unused Indexes"
+          TopLeft="74.1666666666667,97.5" />
+        <EdgeLayout
+          Id="Package\Foreach SQL Server Instance.PrecedenceConstraints[Constraint]"
+          TopLeft="152.166666666667,62">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35.5"
+              Start="0,0"
+              End="0,28">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="183,42"
+          Id="Package\Foreach SQL Server Instance\Update LastMonitored"
+          TopLeft="60.6666666666667,175" />
+        <EdgeLayout
+          Id="Package\Foreach SQL Server Instance.PrecedenceConstraints[Constraint 1]"
+          TopLeft="152.166666666667,139.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35.5"
+              Start="0,0"
+              End="0,28">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="300,240"
+          Size="300,283"
+          Id="Package\Foreach SQL Server Instance"
+          TopLeft="457.25,122" />
+        <NodeLayout
+          Size="223,42"
+          Id="Package\Retrieve SQL Server Instances"
+          TopLeft="495.75,37" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="607.25,79">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43"
+              Start="0,0"
+              End="0,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Retrieve a list of SQL Server instances that we will manually populate"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="229,60"
+          Id="fc76b835-0b85-4a2a-b3a6-14c5ff3207b8"
+          TopLeft="767.5,28" />
+        <AnnotationLayout
+          Text="Use sys.dm_db_index_usage_stats to&#xD;&#xA;find potentially unused indexes"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="222,60"
+          Id="887bb5ad-2490-41b1-baee-4e7f4c1fd19e"
+          TopLeft="767.5,254" />
+        <AnnotationLayout
+          Text="Use sys.dm_os_performance_counters to&#xD;&#xA;monitor database &amp; log growth over time"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="263,60"
+          Id="601323c7-6d79-4201-babf-05aaf7360d30"
+          TopLeft="767.5,175.5" />
+        <AnnotationLayout
+          Text="Update our SQL Server instance config&#xD;&#xA;table with the last successful execution time"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="262,60"
+          Id="ff2c5169-be67-46f3-aeee-ae116c5b01ab"
+          TopLeft="767.5,331.5" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Foreach SQL Server Instance\Database Size">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source"
+          TopLeft="392,80" />
+        <NodeLayout
+          Size="239,42"
+          Id="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination"
+          TopLeft="373,176" />
+        <EdgeLayout
+          Id="Package\Foreach SQL Server Instance\Database Size.Paths[OLE DB Source Output]"
+          TopLeft="493.25,122">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,54"
+              Start="0,0"
+              End="0,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach SQL Server Instance\Database Size\Dynamic SQL Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach SQL Server Instance\Database Size\Central Logging Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Foreach SQL Server Instance\Unused Indexes">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source"
+          TopLeft="392,80" />
+        <NodeLayout
+          Size="239,42"
+          Id="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination"
+          TopLeft="373,176" />
+        <EdgeLayout
+          Id="Package\Foreach SQL Server Instance\Unused Indexes.Paths[OLE DB Source Output]"
+          TopLeft="493.25,122">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,54"
+              Start="0,0"
+              End="0,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach SQL Server Instance\Unused Indexes\Dynamic SQL Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach SQL Server Instance\Unused Indexes\Central Logging Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

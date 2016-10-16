@@ -1,0 +1,251 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/22/2012 10:25:12 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="VMSQL2012E"
+  DTS:CreatorName="vmSQL2012E\A. Ray Leonard"
+  DTS:DTSID="{F658F989-CF08-44F6-A059-22524DDF5048}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.2100.60"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="TestParent"
+  DTS:PackageType="5"
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{5EE6B38C-63F7-49BD-860D-3FA3BEC395B4}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{53BE06CC-6D2E-4ECA-A8E5-4B27BECC52F6}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="AmountSum">
+      <DTS:VariableValue
+        DTS:DataType="14">123.45</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B5381D07-7BD0-4F74-BD73-E9735FAAB537}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DateFormat">
+      <DTS:VariableValue
+        DTS:DataType="8">yyyy/MM/dd HH:mm:ss.fff</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D02D85D5-A702-461E-8B7C-4CEA9B42D1D2}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Debug">
+      <DTS:VariableValue
+        DTS:DataType="11">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3C5D79EF-2CA2-4016-BDDA-14A5375BFF65}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Delimiter">
+      <DTS:VariableValue
+        DTS:DataType="8">,</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{678B4F0D-D241-4536-9D11-7C2A7938FF91}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ExtractFooterFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Users\A. Ray Leonard\Documents\MyFileFooterSource.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3A851D6B-51F7-4018-B4F8-E87C23936D9A}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ExtractHeaderFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Users\A. Ray Leonard\Documents\MyFileHeaderSource.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{971CD528-9E95-40C5-945E-4E8DB2FFEF2B}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="OutputPath">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Users\A. Ray Leonard\Documents\OutputHeader.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DF645AF8-B3A4-4C96-B148-4D60D6D475B8}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RecordCount">
+      <DTS:VariableValue
+        DTS:DataType="3">42</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\seq Test WriteFileFooter"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:Disabled="True"
+      DTS:DTSID="{CAFBF3FD-0E1B-4C78-8843-CD222F65D01D}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="seq Test WriteFileFooter">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\seq Test WriteFileFooter\ept Execute WriteFileFooter Package"
+          DTS:CreationName="SSIS.ExecutePackageTask.3"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{54A706D4-D4AF-4288-8285-75D5C95F9254}"
+          DTS:ExecutableType="SSIS.ExecutePackageTask.3"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="ept Execute WriteFileFooter Package"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>WriteFileFooter.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>AmountSum</ParameterName>
+                <BindedVariableOrParameterName>User::AmountSum</BindedVariableOrParameterName>
+              </ParameterAssignment>
+              <ParameterAssignment>
+                <ParameterName>DateFormat</ParameterName>
+                <BindedVariableOrParameterName>User::DateFormat</BindedVariableOrParameterName>
+              </ParameterAssignment>
+              <ParameterAssignment>
+                <ParameterName>Debug</ParameterName>
+                <BindedVariableOrParameterName>User::Debug</BindedVariableOrParameterName>
+              </ParameterAssignment>
+              <ParameterAssignment>
+                <ParameterName>Delimiter</ParameterName>
+                <BindedVariableOrParameterName>User::Delimiter</BindedVariableOrParameterName>
+              </ParameterAssignment>
+              <ParameterAssignment>
+                <ParameterName>ExtractFilePath</ParameterName>
+                <BindedVariableOrParameterName>User::ExtractFooterFilePath</BindedVariableOrParameterName>
+              </ParameterAssignment>
+              <ParameterAssignment>
+                <ParameterName>LastUpdateDateTime</ParameterName>
+                <BindedVariableOrParameterName>System::StartTime</BindedVariableOrParameterName>
+              </ParameterAssignment>
+              <ParameterAssignment>
+                <ParameterName>RecordCount</ParameterName>
+                <BindedVariableOrParameterName>User::RecordCount</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\seq Test WriteHeader"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{1B45D841-FAF3-4028-A8BD-EC5633AF05D2}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="seq Test WriteHeader">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\seq Test WriteHeader\ept Execute WriteFileHeader Package"
+          DTS:CreationName="SSIS.ExecutePackageTask.3"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{D03F2E2B-55FA-4B5A-8F1C-D0C2659812B5}"
+          DTS:ExecutableType="SSIS.ExecutePackageTask.3"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="ept Execute WriteFileHeader Package"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>WriteFileHeader.dtsx</PackageName>
+              <ParameterAssignment>
+                <ParameterName>AmountSum</ParameterName>
+                <BindedVariableOrParameterName>User::AmountSum</BindedVariableOrParameterName>
+              </ParameterAssignment>
+              <ParameterAssignment>
+                <ParameterName>DateFormat</ParameterName>
+                <BindedVariableOrParameterName>User::DateFormat</BindedVariableOrParameterName>
+              </ParameterAssignment>
+              <ParameterAssignment>
+                <ParameterName>Debug</ParameterName>
+                <BindedVariableOrParameterName>User::Debug</BindedVariableOrParameterName>
+              </ParameterAssignment>
+              <ParameterAssignment>
+                <ParameterName>Delimiter</ParameterName>
+                <BindedVariableOrParameterName>User::Delimiter</BindedVariableOrParameterName>
+              </ParameterAssignment>
+              <ParameterAssignment>
+                <ParameterName>ExtractFilePath</ParameterName>
+                <BindedVariableOrParameterName>User::ExtractHeaderFilePath</BindedVariableOrParameterName>
+              </ParameterAssignment>
+              <ParameterAssignment>
+                <ParameterName>LastUpdateDateTime</ParameterName>
+                <BindedVariableOrParameterName>System::StartTime</BindedVariableOrParameterName>
+              </ParameterAssignment>
+              <ParameterAssignment>
+                <ParameterName>RecordCount</ParameterName>
+                <BindedVariableOrParameterName>User::RecordCount</BindedVariableOrParameterName>
+              </ParameterAssignment>
+              <ParameterAssignment>
+                <ParameterName>OutputFilePath</ParameterName>
+                <BindedVariableOrParameterName>User::OutputPath</BindedVariableOrParameterName>
+              </ParameterAssignment>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="252,42"
+          Id="Package\seq Test WriteFileFooter\ept Execute WriteFileFooter Package"
+          TopLeft="23,20" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="286,117"
+          Size="286,160"
+          Id="Package\seq Test WriteFileFooter"
+          TopLeft="115,57" />
+        <NodeLayout
+          Size="230,42"
+          Id="Package\seq Test WriteHeader\ept Execute WriteFileHeader Package"
+          TopLeft="21,23" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="282,120"
+          Size="282,163"
+          Id="Package\seq Test WriteHeader"
+          TopLeft="481,67" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

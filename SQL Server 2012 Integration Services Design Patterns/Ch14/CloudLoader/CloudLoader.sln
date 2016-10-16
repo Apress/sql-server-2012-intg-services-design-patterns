@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "CloudLoader", "CloudLoader\CloudLoader.dtproj", "{999A9CA9-1679-4DA0-BC06-FA35DE1D6744}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://vmsql2012e:8080/tfs/data%20integration%20project%20collection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = CloudLoader\\CloudLoader.dtproj
+		SccProjectName1 = CloudLoader
+		SccLocalPath1 = CloudLoader
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{999A9CA9-1679-4DA0-BC06-FA35DE1D6744}.Development|Default.ActiveCfg = Development
+		{999A9CA9-1679-4DA0-BC06-FA35DE1D6744}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
